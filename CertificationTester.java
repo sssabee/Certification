@@ -1,29 +1,118 @@
 package sab;
 
-
-public class CertificationTester {
-    public static void main(String[] args) {
-        RegularCourseCertification r = new RegularCourseCertification("Sabeeha", "Ai", 89, 4);
-        System.out.println("Regular Course Details");
-        System.out.println("**************************************");
-        System.out.println("Student Name: " + r.getStudentName());
-        System.out.println("Course Name: " + r.getCourseName());
-        System.out.println("Course Name: " + r.getDuration() +" Months");
-        System.out.println("Registration ID: " + r.getRegistrationId());
-        System.out.println("Total Fees: " + r.calculateFee());
-        
-        CrashCourseCertification c = new CrashCourseCertification("anzum", "Angular", 88);
-        System.out.println("\nCrash Course Details");
-        System.out.println("**************************************");
-        System.out.println("Student Name: " + c.getStudentName());
-        System.out.println("Course Name: " + c.getCourseName());
-        System.out.println("Course Name: " + c.getDuration() +" Months");
-        System.out.println("Registration ID: " + c.getRegistrationId());
-        System.out.println("Total Fees: " + c.calculateFee());
-    }
+class Courseregistration {
+	private String studentName;
+	private int registrationId;
+	private float qualifyingMarks;
+	private double courseFee;
+	private int courseId;
+	private boolean hotelRequired;
+	int amount=0;
+	int discount=0;
+	public Courseregistration(String studentName,int registrationId,float qualifyingMarks,int courseId,
+ boolean hotelRequired) {
+		this.studentName=studentName;
+		this.registrationId=registrationId;
+		this.qualifyingMarks=qualifyingMarks;
+	
+		this.courseId=courseId;
+		this.hotelRequired=hotelRequired;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public int getRegistrationId(){
+		return registrationId;
+	}
+	public void setRegistrationId(int registrationId) {
+		this.registrationId=registrationId;
+	}
+	public float getQualifyingMarks() {
+		return qualifyingMarks;
+	}
+	public void setQualifyingMarks(float qualifyingMarks) {
+		this.qualifyingMarks=qualifyingMarks;
+	}
+	public double getCourseFee() {
+		return courseFee;
+	}
+	public void setCourseFee(double courseFee) {
+		this.courseFee=courseFee;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId=courseId;
+	}
+	public boolean getHotelRequired() {
+		return hotelRequired;
+	}
+	public void setHotelRequired(boolean hotelRequired) {
+		this.hotelRequired=hotelRequired;
+	}
+	public float ValidateMarks() {
+		float marks=getQualifyingMarks();
+		
+		if(marks<=65) {
+			System.out.println("Marks is less than 65. You are not eligible for admission!!");
+		}
+		else if(marks>=65 && marks<=69) {
+			 discount = 5;
+		}
+		else if(marks>=70 && marks<=84) {
+			 discount=10;
+		}
+		else {
+			discount=15;
+		}
+		return marks;
+	}
+	
+	public int ValidatecourseId() {
+		int id=getCourseId();
+		
+		if(id==1001) {
+			amount=55000;
+		}
+		else if(id==1002) {
+			amount=35675;
+		}
+		else if(id==1003) {
+			amount=28300;
+		}
+		else if(id==1004) {
+			amount=22350;
+		}
+		else if(id==1005) {
+			amount=115000;
+		}
+		else {
+			System.out.println("Invalid Course Id. Please try again");
+		}
+		return id;
+	}
+	public double calculateCourseFee(){
+		return amount-(amount*discount)/100;
+	
+	}
 }
+class Tester{
+		public static void main(String args[]) {
+			Courseregistration a=new Courseregistration("peter",5001,78,1005,false);
 
-	        
-	    
+			
+			System.out.println("Student Name: "+a.getStudentName());
+			System.out.println("Course Id: "+a.ValidatecourseId());
+			System.out.println("Qualifying Exam Marks: "+a.ValidateMarks());
+			System.out.println("Student's Registration Id: "+a.getRegistrationId());
+			System.out.println("Total course Fee: "+a.calculateCourseFee());
+			System.out.println("Hostel Required: "+a.getHotelRequired());
+		}
+	}
+
 
 
